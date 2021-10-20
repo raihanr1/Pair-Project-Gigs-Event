@@ -11,8 +11,9 @@
     <label for="usernameOremail">Username or Email</label> <br>
     <input type="text" name="usernameOremail" id="usernameOremail"> <br>
     <label for="password">Password</label> <br>
-    <input type="text" name="password" id="password"> <br>
+    <input type="password" name="password" id="password"> <br>
     <button>Login</button>
+    <button><a href="/register" style="text-decoration: none;">Sign Up</a></button>
     <% if(error) { %>
         <p><%= error %> </p>
     <% } %>

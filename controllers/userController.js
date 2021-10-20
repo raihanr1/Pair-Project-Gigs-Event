@@ -19,7 +19,6 @@ class userController {
             })
             res.send(errors)
         })
-        console.log(req.body);
     }
 
     static loginForm(req, res) {
@@ -39,15 +38,25 @@ class userController {
             }
         })
         .then(data => {
-            console.log(data);
             if (isValidAccount(data[0].password,password)) {
-                res.send('thats right')
+                req.session.userId = data[0].id
+                return res.send('thats right')
             } else{
-                res.redirect('/login?error=Email and Password is wrong')
+                return res.redirect('/login?error=Email and Password is wrong')
             }
         })
         .catch(err => {
             res.redirect('/login?error=Email and Password is wrong')
+        })
+    }
+
+    static logOut(req, res) {
+        req.session.destroy(err => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/login')
+            }
         })
     }
 }
