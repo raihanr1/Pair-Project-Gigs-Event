@@ -4,11 +4,11 @@ const loginRouter = require('./login')
 
 const router = express.Router()
 
-router.get('/', (req, res => {
+router.get('/', (req, res) => {
     return res.status(200).json({
         halo: 'hai'
     })
-}))
+})
 router.use('/home', homeRouter)
 router.use('/user', loginRouter)
 
