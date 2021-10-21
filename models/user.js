@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasOne(models.Profile, {foreignKey: 'UserId'})
-      User.hasMany(models.Event, {foreignKey: 'UserId'})
+      User.belongsToMany(models.Concert, {through: models.Event})
     }
   };
   User.init({
@@ -67,6 +67,7 @@ module.exports = (sequelize, DataTypes) => {
         let salt = bcrypt.genSaltSync(10);
         let hash = bcrypt.hashSync(password, salt);
         instance.password = hash
+        instance.role = 'User'
       }
     },
     modelName: 'User',

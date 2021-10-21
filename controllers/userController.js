@@ -4,7 +4,11 @@ const { isValidAccount } = require("../helper/helper")
 
 class userController {
     static registerForm(req, res) {
-        res.render('registerForm')
+        let error;
+        if (req.query.error) {
+            error = req.query.error.split(',')
+        }
+        res.render('registerForm', {error})
     }
 
     static postRegisterForm(req, res) {
@@ -17,7 +21,7 @@ class userController {
             let errors = err.errors.map(el => {
                 return el.message
             })
-            res.send(errors)
+            res.redirect(`/register?error=${errors}`)
         })
     }
 
@@ -39,7 +43,7 @@ class userController {
         })
         .then(data => {
             if (isValidAccount(data[0].password,password)) {
-                req.session.userId = data[0].id
+                req.session.role = data[0].role
                 return res.send('thats right')
             } else{
                 return res.redirect('/login?error=Email and Password is wrong')

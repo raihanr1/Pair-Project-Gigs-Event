@@ -7,4 +7,21 @@ function isValidAccount(passDB, input) {
     }
 }
 
-module.exports = {isValidAccount}
+
+function middleware(req, res, next) {
+    if (req.session.role) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
+function isAdmin(req, res, next) {
+    if (req.session.role === 'Admin') {
+        next()
+    } else {
+        res.redirect('/home')
+    }
+}
+
+module.exports = {isValidAccount, middleware, isAdmin}

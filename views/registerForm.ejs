@@ -16,9 +16,13 @@
     <input type="password" name="password" id="password"> <br>
     <label for="dateOfBirth">Date Of Birth</label> <br>
     <input type="date" name="dateOfBirth" id="dateOfBirth"> <br>
-    <label for="role">Role</label> <br>
-    <input type="text" name="role" id="role"> <br>
     <button>Register</button>
     </form>
+    
+    <% if(error) { %>
+        <% error.forEach(el => { %>
+            <p style="color: red;"><%= el %> </p>
+        <% })  %> 
+    <% } %> 
 </body>
 </html>
