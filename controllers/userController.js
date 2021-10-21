@@ -43,6 +43,8 @@ class userController {
         })
         .then(data => {
             if (isValidAccount(data[0].password,password)) {
+                console.log(data[0]);
+                req.session.UserId = data[0].id
                 req.session.role = data[0].role
                 return res.redirect('/home')
             } else{

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       Concert.belongsToMany(models.User, {through: models.Event})
-      Concert.hasMany(models.GuestStars, {foreignKey: 'ConcertId'})
+      Concert.hasMany(models.GuestStar, {foreignKey: 'ConcertId'})
     }
   };
   Concert.init({

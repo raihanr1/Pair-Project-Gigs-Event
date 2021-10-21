@@ -4,20 +4,17 @@
     <div class="container-md mt-3">
       <h1 class="text-center">Edit Profile</h1>
       <br>
-      <form action="/customer/<%=data.id%>/profile/edit" method="post">
+      <form action="/user/profile/edit" method="post">
         <div class="row">
           <div class="col">
             <label class="form-label">First Name</label>
-            <input class="form-control" type="text" name="firstName" value="<%=data.firstName%>">
+            <input class="form-control" type="text" name="firstName" value="<%=data[0].firstName%>">
             <br>
             <label class="form-label">Last Name</label>
-            <input class="form-control" type="text" name="lastName" value="<%=data.lastName%>">
-            <br>
-            <label class="form-label">Date of Birth</label>
-            <input class="form-control" type="text" name="dateOfBirth" value="<%=data.formatDate%>">
+            <input class="form-control" type="text" name="lastName" value="<%=data[0].lastName%>">
             <br>
             <label class="form-label">Favourite Genre</label>
-            <input class="form-control" type="text" name="favoriteGenre" value="<%=data.favoriteGenre%>">
+            <input class="form-control" type="text" name="favoriteGenre" value="<%=data[0].favoriteGenre%>">
           </div>
           <br>
           <div>

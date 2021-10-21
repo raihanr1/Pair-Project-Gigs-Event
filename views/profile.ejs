@@ -12,8 +12,8 @@
       <div class="row">
         <p class="fs-4"><strong>Name :</strong></p>
         <p class="fs-4">
-          <%=data.firstName%>
-            <%=data.lastName %>
+          <%=data[0].firstName%>
+            <%=data[0].lastName %>
         </p>
         <br>
       </div>
@@ -21,7 +21,7 @@
       <div class="row">
         <p class="fs-4"><strong>Birth Date :</strong></p>
         <p class="fs-4">
-          <%=data.formatDate%>
+          <%=data[0].formatDate%>
         </p>
         <br>
       </div>
@@ -29,12 +29,12 @@
       <div class="row">
         <p class="fs-4"><strong>Favorite Genre :</strong></p>
         <p class="fs-4">
-          <%=data.favoriteGenre%>
+          <%=data[0].favoriteGenre%>
         </p>
         <br>
       </div>
 
-      <button type="submit" class="btn btn-dark mt-1 mb-5"><a href="/customer/<%=data.id%>/profile/edit"
+      <button type="submit" class="btn btn-dark mt-1 mb-5"><a href="/user/profile/edit"
           style="text-decoration: none; color:white">Edit</a></button>
     </div>
 

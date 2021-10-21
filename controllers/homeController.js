@@ -30,6 +30,7 @@ class Controller {
     }
 
     static showListConcert(req, res) {
+        console.log(req.session, 'masukk');
         Concert.findAll()
         .then(data => {
             res.render('listConcert', {data})

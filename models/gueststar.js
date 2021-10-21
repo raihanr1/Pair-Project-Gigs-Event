@@ -3,19 +3,19 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class GuestStars extends Model {
+  class GuestStar extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      GuestStars.belongsTo(models.Concert, {foreignKey: 'ConcertId'})
-      GuestStars.hasMany(models.Song, {foreignKey: 'BandId'})
-      GuestStars.belongsTo(models.Category, {foreignKey: 'CategoryId'})
+      GuestStar.belongsTo(models.Concert, {foreignKey: 'ConcertId'})
+      GuestStar.hasMany(models.Song, {foreignKey: 'BandId'})
+      GuestStar.belongsTo(models.Category, {foreignKey: 'CategoryId'})
     }
   };
-  GuestStars.init({
+  GuestStar.init({
     name: {
       type: DataTypes.STRING,
       validate: {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'GuestStars',
+    modelName: 'GuestStar',
   });
-  return GuestStars;
+  return GuestStar;
 };
