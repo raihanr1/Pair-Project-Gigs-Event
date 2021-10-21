@@ -1,4 +1,4 @@
-const {Category, Soloist, Band, Concert} = require("../models")
+const {Category, GuestStars, Concert} = require("../models")
 
 class Controller {
     static homePage(req, res) {
@@ -41,15 +41,7 @@ class Controller {
 
     static addGuestStar(req, res) {
         let category; 
-        Category.findAll({
-            include: [
-                {
-                    model: Band
-                }, {
-                    model: Soloist
-                }
-            ]
-        })
+        Category.findAll()
         .then(categoryData => {
             category = categoryData
             return Concert.findAll()
@@ -64,15 +56,7 @@ class Controller {
 
     static postAddGuestStar(req, res) {
         let {CategoryId, name, debutYear, ConcertId, imageURL} = req.body
-        let model;
-        if (req.body.CategoryId == 2) {
-            model = Soloist
-        }
-        if (req.body.CategoryId == 1) {
-            model = Band
-        }
-
-        model.create({CategoryId, name, debutYear, ConcertId, imageURL})
+        GuestStars.create({CategoryId, name, debutYear, ConcertId, imageURL})
         .then(data => {
             res.send('masukkkk')
         })
@@ -105,26 +89,21 @@ class Controller {
 
     static seeDetailListCategory(req, res) {
         let categoryId = req.params.categoryId
-        Category.findAll({
-            include: [
-                {
-                    model: Band
-                },
-                {
-                    model: Soloist
+        Category.findByPk(+categoryId, {
+            include: {
+                model: GuestStars,
+                where: {
+                    CategoryId: +categoryId
                 }
-            ]
+            }
         })
         .then(data => {
-            res.render('listBands', {data})
+            res.send(data)
+            // res.render('listCategory', {data})
         })
         .catch(err => {
             res.send(err)
         })
-    }
-
-    static seeDetailListCategory(req, res) {
-        res
     }
 }
 
