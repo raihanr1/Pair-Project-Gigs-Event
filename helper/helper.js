@@ -9,18 +9,20 @@ function isValidAccount(passDB, input) {
 
 
 function middleware(req, res, next) {
+    console.log(req.session.role, 'midleee');
     if (req.session.role) {
         next()
     } else {
-        res.redirect('/login')
+        res.redirect('/user/login')
     }
 }
 
 function isAdmin(req, res, next) {
+    console.log(req.session, 'adminnn');
     if (req.session.role === 'Admin') {
         next()
     } else {
-        res.redirect('/home')
+        res.redirect('/user/home')
     }
 }
 

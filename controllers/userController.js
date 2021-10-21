@@ -15,13 +15,13 @@ class userController {
         let {username, email, password, dateOfBirth, role} = req.body
         User.create({username, email, password, dateOfBirth, role})
         .then(newUser => {
-            res.redirect('/login')
+            res.redirect('/user/login')
         })
         .catch(err => {
             let errors = err.errors.map(el => {
                 return el.message
             })
-            res.redirect(`/register?error=${errors}`)
+            res.redirect(`/user/register?error=${errors}`)
         })
     }
 
@@ -50,7 +50,7 @@ class userController {
             }
         })
         .catch(err => {
-            res.redirect('/login?error=Email and Password is wrong')
+            res.redirect('/user/login?error=Email and Password is wrong')
         })
     }
 
@@ -59,7 +59,7 @@ class userController {
             if (err) {
                 console.log(err);
             } else {
-                res.redirect('/login')
+                res.redirect('/user/login')
             }
         })
     }
