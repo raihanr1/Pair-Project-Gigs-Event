@@ -2,7 +2,11 @@ const {Category, GuestStar, Concert, Song} = require("../models")
 
 class Controller {
     static homePage(req, res) {
-        Category.findAll()
+        Category.findAll({
+            include: {
+                model: GuestStar
+            }
+        })
         .then(data => {
             res.render('home', {data})
         })
@@ -56,7 +60,7 @@ class Controller {
 
     static postAddGuestStar(req, res) {
         let {CategoryId, name, debutYear, ConcertId, imageURL} = req.body
-        GuestStars.create({CategoryId, name, debutYear, ConcertId, imageURL})
+        GuestStar.create({CategoryId, name, debutYear, ConcertId, imageURL})
         .then(data => {
             res.send('masukkkk')
         })
@@ -91,7 +95,7 @@ class Controller {
         let categoryId = req.params.categoryId
         Category.findByPk(+categoryId, {
             include: {
-                model: GuestStars,
+                model: GuestStar,
                 where: {
                     CategoryId: +categoryId
                 }

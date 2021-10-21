@@ -1,32 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Guest Star</title>
-</head>
-<body>
-    <form action="/home/guest-star/add" method="post">
-        <label for="CategoryId">Category</label> <br>
-        <select name="CategoryId"> <br>
-            <% category.forEach(el => { %>
-                <option value="<%= el.id %>"><%= el.name %></option>
-            <% }) %> 
-        </select> <br>
-        <label for="name">Name</label> <br>
-        <input type="text" name="name" id="name"> <br>
-        <label for="debutYear">Debut Year</label> <br>
-        <input type="date" name="debutYear" id="debutYear"> <br>
-        <label for="">Concert at:</label> <br>
-        <select name="ConcertId">
-            <% concert.forEach(el => { %>
-                <option value="<%= el.id %>"><%= el.name %> -- <%= el.location %></option>
-            <% }) %> 
-        </select> <br>
-        <label for="imageURL">Image URL Artist</label> <br>
-        <input type="text" name="imageURL"> <br>
-        <button>Add Guest Star</button>
-    </form>
-</body>
-</html>
+<%- include('./partials/header') %>
+    <%- include('./partials/navbar') %>
+        <br>
+        <div class="container-md mt-3">
+            <h1 class="text-center">Add New Guest Star</h1><br><br>
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="col">
+                        <form action="/home/guest-star/add" method="post">
+                            <label class="form-label">Category</label> <br>
+                            <select class="form-select" aria-label="Default select example">
+                                <option disabled selected>-- SELECT CATEGORY--</option>
+                                <% category.forEach(el=> { %>
+                                    <option value="<%= el.id %>">
+                                        <%= el.name %>
+                                    </option>
+                                    <% }) %>
+                            </select><br>
+                            <label class="form-label">Name</label> <br>
+                            <input class="form-control" type="text" name="name"> <br>
+                            <label class="form-label">Debut Year</label> <br>
+                            <input class="form-control" type="date" name="debutYear"> <br>
+                            <label class="form-label">Concert at:</label> <br>
+                            <select class="form-select" aria-label="Default select example">
+                                <option disabled selected>--SELECT CONCERT--</option>
+                                <% concert.forEach(el=> { %>
+                                    <option value="<%= el.id %>">
+                                        <%= el.name %> - <%= el.location %>
+                                    </option>
+                                    <% }) %>
+                            </select> <br>
+                            <label class="form-label">Image URL Artist</label> <br>
+                            <input class="form-control" type="text" name="imageURL"> <br>
+                            <button type="submit" class="btn btn-dark">Add Guest Star</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./partials/footer') %>

@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Bands</title>
-</head>
-<body>
-    <table>
-        <tr>
-          <th>Number</th>
-          <th>Name</th>
-          <th>Debut Year</th>
-          <th>Image URL</th>
-        </tr>
-        <% data.artist.forEach(el,i => { %>
-          <tr>
-            <td><%= i+1 %></td>
-            <td><%= el.name %></td>
-            <td><%= el.debutYear %></td>
-            <td><input type="image" src="<%= el.imageURL %>" height="200" width="200"></td>
-          </tr>
-        <% }); %> 
-      </table>
-</body>
-</html>
+<%- include('./partials/header') %>
+  <%- include('./partials/navbar') %>
+    <br>
+    <div class="container-md mt-3 justify-content-center">
+      <div class="text-center mb-5">
+        <h3><strong>Category Detail</strong></h3>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <div class="card-deck">
+            <div class="card-group">
+              <% data.GuestStars.forEach(el=> { %>
+                <div class="card-body">
+                  <div class="card" style="width: 21rem;">
+                    <img src="<%= el.imageURL %>" class="card-img-top" alt="<%= el.name %>" style="height: 15rem;">
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <%= el.name %>
+                      </h4>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <p class="fs-5">
+                            Debut Year : <%= el.debutYear %>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('./partials/header') %>
