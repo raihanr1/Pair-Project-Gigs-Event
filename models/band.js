@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Band.belongsTo(models.Concert, {foreignKey: 'ConcertId'})
-      Band.hasMany(models.Song, {foreignKey: 'BandId'})
+      Band.hasMany(models.BandSong, {foreignKey: 'BandId'})
     }
   };
   Band.init({
