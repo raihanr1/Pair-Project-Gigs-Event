@@ -1,0 +1,22 @@
+version: "3"
+services:
+  gigs:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app #bind mount
+    environment:
+      - PORT=3000
+    command: npm run start
+    depends_on:
+      - pg-db
+  pg-db:
+    image: postgres
+    env_file:
+      - database.env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+
+volumes:
+  database-data:
