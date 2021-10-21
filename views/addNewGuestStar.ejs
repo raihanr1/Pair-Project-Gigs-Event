@@ -7,8 +7,26 @@
     <title>Add Guest Star</title>
 </head>
 <body>
-    <select name="CategoryId">
-        <option value=""></option>
-    </select>
+    <form action="/home/guest-star/add" method="post">
+        <label for="CategoryId">Category</label> <br>
+        <select name="CategoryId"> <br>
+            <% category.forEach(el => { %>
+                <option value="<%= el.id %>"><%= el.name %></option>
+            <% }) %> 
+        </select> <br>
+        <label for="name">Name</label> <br>
+        <input type="text" name="name" id="name"> <br>
+        <label for="debutYear">Debut Year</label> <br>
+        <input type="date" name="debutYear" id="debutYear"> <br>
+        <label for="">Concert at:</label> <br>
+        <select name="ConcertId">
+            <% concert.forEach(el => { %>
+                <option value="<%= el.id %>"><%= el.name %> -- <%= el.location %></option>
+            <% }) %> 
+        </select> <br>
+        <label for="imageURL">Image URL Artist</label> <br>
+        <input type="text" name="imageURL"> <br>
+        <button>Add Guest Star</button>
+    </form>
 </body>
 </html>

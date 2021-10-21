@@ -14,9 +14,11 @@ router.post('/guest-star/add', Controller.postAddGuestStar)
 router.get('/concert/add', Controller.addNewConcert)
 router.post('/concert/add', Controller.postNewConcert)
 
+router.get('/list/concert', Controller.showListConcert)
+
+
 router.get('/category/:categoryId', Controller.seeDetailListCategory)
 
-router.get('/list/concert', Controller.showListConcert)
 
 router.get('/masuk', (req, res) => {
     res.send('masuk boleh bukan admin soalnye')

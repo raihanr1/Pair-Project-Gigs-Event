@@ -32,8 +32,7 @@ class Controller {
     static showListConcert(req, res) {
         Concert.findAll()
         .then(data => {
-            console.log(data);
-            res.send(data)
+            res.render('listConcert', {data})
         })
         .catch(err => {
             res.send(err)
@@ -41,6 +40,7 @@ class Controller {
     }
 
     static addGuestStar(req, res) {
+        let category; 
         Category.findAll({
             include: [
                 {
@@ -50,8 +50,12 @@ class Controller {
                 }
             ]
         })
-        .then(data => {
-            res.render('addNewGuestStar')
+        .then(categoryData => {
+            category = categoryData
+            return Concert.findAll()
+        })
+        .then(concert => {
+            res.render('addNewGuestStar', {category, concert})
         })
         .catch(err => {
             res.send(err)
@@ -59,7 +63,25 @@ class Controller {
     }
 
     static postAddGuestStar(req, res) {
+        let {CategoryId, name, debutYear, ConcertId, imageURL} = req.body
+        let model;
+        if (req.body.CategoryId == 2) {
+            model = Soloist
+        }
+        if (req.body.CategoryId == 1) {
+            model = Band
+        }
 
+        model.create({CategoryId, name, debutYear, ConcertId, imageURL})
+        .then(data => {
+            res.send('masukkkk')
+        })
+        .catch(err => {
+            let error = err.errors.map(el => {
+                return el.message
+            })
+            res.send(error)
+        })
     }
 
     static addNewConcert(req, res) {
@@ -68,12 +90,12 @@ class Controller {
 
     static postNewConcert(req, res) {
         let {name, location, date, price, imageURL} = req.body
-        Concert.create({name, location, date, price, imageURL})
+        Concert.create({name, location, date, price:+price, imageURL})
         .then(data => {
-            let success = 'Success create new concert'
-            res.redirect(`/home/concert/add?success=${success}`)
+            res.redirect(`/home/list/concert`)
         })
         .catch(err => {
+            console.log(err);
             let error = err.errors.map(el => {
                 return el.message
             })
@@ -99,6 +121,10 @@ class Controller {
         .catch(err => {
             res.send(err)
         })
+    }
+
+    static seeDetailListCategory(req, res) {
+        res
     }
 }
 

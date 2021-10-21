@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    get dateFormat() {
+      return this.date.toLocaleDateString('id-ID',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    }
+
+    get priceToRupiah() {
+      return this.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })
+    }
+
     static associate(models) {
       Concert.belongsToMany(models.User, {through: models.Event})
       Concert.hasMany(models.Band, {foreignKey: 'ConcertId'})
@@ -35,7 +43,14 @@ module.exports = (sequelize, DataTypes) => {
     date: {
       type: DataTypes.DATE,
       validate: {
-        min: new Date()
+        isValidDate(value) {
+          if (value < new Date()) {
+            throw new Error('the earliest time is tomorrow')
+          }
+        },
+        notEmpty: {
+          msg: 'Date is required'
+        }
       }
     },
     price: {

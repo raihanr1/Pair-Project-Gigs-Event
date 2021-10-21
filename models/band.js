@@ -16,10 +16,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Band.init({
-    name: DataTypes.STRING,
-    debutYear: DataTypes.DATE,
-    ConcertId: DataTypes.INTEGER,
-    CategoryId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty:{
+          msg: 'Name is required'
+        }
+      }
+    },
+    debutYear: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty:{
+          msg: 'Debut Year is required'
+        }
+      }
+    },
+    ConcertId: DataTypes.INTEGER 
+    ,
+    CategoryId: DataTypes.INTEGER,
+    imageURL: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Image URL is required'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Band',
