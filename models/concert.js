@@ -16,9 +16,47 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Concert.init({
-    name: DataTypes.STRING,
-    location: DataTypes.STRING,
-    date: DataTypes.DATE
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Name is required'
+        }
+      }
+    },
+    location: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Location is required'
+        }
+      }
+    },
+    date: {
+      type: DataTypes.DATE,
+      validate: {
+        min: new Date()
+      }
+    },
+    price: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Price is required'
+        }
+      }
+    },
+    imageURL: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Image URL is required'
+        }, 
+        isUrl: {
+          msg: 'Image Url must URL type'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Concert',

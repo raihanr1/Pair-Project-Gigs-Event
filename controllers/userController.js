@@ -44,7 +44,7 @@ class userController {
         .then(data => {
             if (isValidAccount(data[0].password,password)) {
                 req.session.role = data[0].role
-                return res.send('thats right')
+                return res.render('home')
             } else{
                 return res.redirect('/login?error=Email and Password is wrong')
             }
