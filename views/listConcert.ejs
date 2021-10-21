@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Concert</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+          <th>Concert Name</th>
+          <th>Place</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Price</th>
+        </tr>
+        <% data.forEach(el => { %>
+            <tr>
+              <td><%= el.name %></td>
+              <td><input type="image" src="<%= el.imageURL %>" height="200" width="200"></td>
+              <td><%= el.location %></td>
+              <td><%= el.dateFormat %></td>
+              <td><%= el.priceToRupiah %></td>
+            </tr>
+        <% })  %> 
+      </table>
+    </body>
+</html>
