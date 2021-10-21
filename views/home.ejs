@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <form action="/home" method="get">
+        <input type="text" name="search" placeholder="search...">
+        <button>Search</button>
+    </form>
+    <button><a href="/home/category/add">Create New Category</a></button>
+    <button><a href="/home/category/list/add"></a></button>
+    <button><a href="/user/logout">Logout</a></button>
+    <h3>Musical Arts</h3>
+    <h4></h4>
+    <table border="1">
+        <tr>
+          <th>image</th>
+          <th>category</th>
+          <th>list</th>
+          <th>action</th>
+        </tr>
+        <% data.forEach(el => { %>
+            <tr>
+              <td><%= el.name %></td>
+              <td><input type="image" src="<%= el.photo %>" width="200" height="200"></td>
+              <td></td>
+              <td><button><a href="/home/category/<%= el.id %>">List Detail</a></button></td>
+            </tr>
+        <% }) %> 
+      </table>
+</body>
+</html>
