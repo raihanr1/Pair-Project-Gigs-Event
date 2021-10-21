@@ -16,13 +16,13 @@ router.post('/concert/add', Controller.postNewConcert)
 
 router.get('/list/concert', Controller.showListConcert)
 
+router.get('/song/add', Controller.addSongs)
+router.post('/song/add', Controller.postAddSongs)
+
 
 router.get('/category/:categoryId', Controller.seeDetailListCategory)
 
 
-router.get('/masuk', (req, res) => {
-    res.send('masuk boleh bukan admin soalnye')
-})
 
 
 module.exports = router

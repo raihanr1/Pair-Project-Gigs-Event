@@ -1,4 +1,4 @@
-const {Category, GuestStars, Concert} = require("../models")
+const {Category, GuestStar, Concert, Song} = require("../models")
 
 class Controller {
     static homePage(req, res) {
@@ -30,7 +30,6 @@ class Controller {
     }
 
     static showListConcert(req, res) {
-        console.log(req.session, 'masukk');
         Concert.findAll()
         .then(data => {
             res.render('listConcert', {data})
@@ -106,6 +105,29 @@ class Controller {
             res.send(err)
         })
     }
+
+    static addSongs(req, res) {
+        GuestStar.findAll()
+        .then(data => {
+            res.render('addSong',{data})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static postAddSongs(req, res) {
+        let {GuestStarId, name, genre} = req.body
+        console.log(req.body);
+        Song.create({GuestStarId, name, genre})
+        .then(data => {
+            res.redirect('/home')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
 }
 
 module.exports = Controller

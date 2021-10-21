@@ -11,7 +11,7 @@ router.post('/register', userController.postRegisterForm)
 router.get('/login', userController.loginForm)
 router.post('/login', userController.postLogin)
  
-router.use(middleware)
+// router.use(middleware)
 
 router.get('/profile', profileController.showProfile)
 

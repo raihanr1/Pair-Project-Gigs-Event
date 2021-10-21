@@ -46,7 +46,7 @@ class userController {
                 console.log(data[0]);
                 req.session.UserId = data[0].id
                 req.session.role = data[0].role
-                return res.redirect('/home')
+                return res.redirect('/user/profile/add')
             } else{
                 return res.redirect('/user/login?error=Email and Password is wrong')
             }
