@@ -19,10 +19,10 @@ router.get('/list/concert', middleware,Controller.showListConcert)
 router.get('/song/add', isAdmin,Controller.addSongs)
 router.post('/song/add', isAdmin,Controller.postAddSongs)
 
-router.get('/ticket/book', isAdmin,Controller.bookTicket)
-router.post('/ticket/book', isAdmin,Controller.postTicket)
-
-router.get('/category/:categoryId', isAdmin,Controller.seeDetailListCategory)
+router.get('/ticket/book', middleware,Controller.bookTicket)
+router.post('/ticket/book', middleware,Controller.postTicket)
+router.get('/ticket/book/:id/delete', isAdmin, Controller.deleteGuest)
+router.get('/category/:categoryId', middleware,Controller.seeDetailListCategory)
 
 
 
