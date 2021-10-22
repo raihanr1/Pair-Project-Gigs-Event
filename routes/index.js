@@ -11,6 +11,5 @@ router.get('/', (req, res) => {
 })
 router.use('/home', homeRouter)
 router.use('/user', loginRouter)
-
 module.exports = router
 
