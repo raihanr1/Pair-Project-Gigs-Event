@@ -9,6 +9,7 @@
         <div class="col-sm">
           <div class="card-deck">
             <div class="card-group">
+              <form action="/home/ticket/book" method="post">
               <% data.forEach(el=> { %>
                 <div class="card-body">
                   <div class="card" style="width: 21rem;">
@@ -20,13 +21,13 @@
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                           <p class="fs-5">
-                            Debut Year : <%= el.debutYear %>
+                            Debut Year : <%= el.debutYear.toLocaleDateString('id-ID')%>
                           </p>
                           <p>Concert Location:</p>
                           <p><%= el.Concert.name %></p>
                           <p>Concert Date:</p>
-                          <p><%= el.Concert.date %></p>
-                          <p>Price : <%= el.Concert.price %> </p>
+                          <p><%= el.Concert.date.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                          <p>Price : <%= el.Concert.price.toLocaleString('id-ID',{ style: 'currency', currency: 'IDR' }) %> </p>
                         </li>
                         <div class="container text-center">
                           <p class="fs-5">
@@ -42,11 +43,13 @@
                             </li>
                           </div>
                           <% }) %> 
-                      </ul>
+                        </ul>
+                        <button type="submit" class="btn btn-dark">Booked</button>
+                      </div>
                     </div>
                   </div>
-                </div>
                 <% }) %>
+              </form>
             </div>
           </div>
         </div>

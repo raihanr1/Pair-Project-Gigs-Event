@@ -143,6 +143,14 @@ class Controller {
         })
     }
 
+    static bookTicket(req, res) {
+        res.render('bookedTicket')
+    }
+
+    static postTicket(req, res) {
+
+    }
+
 }
 
 module.exports = Controller

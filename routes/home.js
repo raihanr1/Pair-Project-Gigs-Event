@@ -19,6 +19,8 @@ router.get('/list/concert', Controller.showListConcert)
 router.get('/song/add', Controller.addSongs)
 router.post('/song/add', Controller.postAddSongs)
 
+router.get('/home/ticket/book', Controller.bookTicket)
+router.post('/home/ticket/book', Controller.postTicket)
 
 router.get('/category/:categoryId', Controller.seeDetailListCategory)
 
