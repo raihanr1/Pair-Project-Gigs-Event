@@ -1,12 +1,22 @@
 const {Category, GuestStar, Concert, Song} = require("../models")
+const { Op } = require("sequelize");
 
 class Controller {
     static homePage(req, res) {
-        Category.findAll({
+        let search = {
             include: {
                 model: GuestStar
             }
-        })
+        }
+
+        if (req.query.search) {
+            search.where = {
+                name: {
+                    [Op.iLike]: `%${req.query.search}%`
+                }
+            }
+        }
+        Category.findAll(search)
         .then(data => {
             res.render('home', {data})
         })
@@ -62,7 +72,7 @@ class Controller {
         let {CategoryId, name, debutYear, ConcertId, imageURL} = req.body
         GuestStar.create({CategoryId, name, debutYear, ConcertId, imageURL})
         .then(data => {
-            res.send('masukkkk')
+            res.redirect('/home')
         })
         .catch(err => {
             let error = err.errors.map(el => {
@@ -93,17 +103,18 @@ class Controller {
 
     static seeDetailListCategory(req, res) {
         let categoryId = req.params.categoryId
-        Category.findByPk(+categoryId, {
-            include: {
-                model: GuestStar,
-                where: {
-                    CategoryId: +categoryId
-                }
+        GuestStar.findAll({
+            include:[{
+                model: Concert
+            }, {
+                model: Song
+            }],
+            where: {
+                CategoryId: +categoryId
             }
         })
         .then(data => {
-            res.send(data)
-            // res.render('listCategory', {data})
+            res.render('listCategory', {data})
         })
         .catch(err => {
             res.send(err)

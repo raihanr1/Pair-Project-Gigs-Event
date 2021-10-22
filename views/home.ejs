@@ -27,13 +27,11 @@
                       <p class="fs-5">Here are some lists of the gueststars :</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                      <% el.GuestStars.forEach(element=> { %>
                         <% if(el.GuestStars.length) {%>
                           <li class="list-group-item">
                             <%= el.GuestStars[0].name%>...
                           </li>
                           <% } %>
-                            <% }); %>
                     </ul>
                     <div class="card-body">
                       <a href="/home/category/<%= el.id %>" class="btn btn-dark">List Detail</a>

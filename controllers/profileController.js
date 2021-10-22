@@ -18,16 +18,19 @@ class profileController {
 
   static addProfile(req, res) {
     let id = req.session.UserId
-    const project = Profile.findOne({ where: { UserId: +id} });
-    if (project.UserId === undefined) {
-      let err;
-      if (req.query.error) {
-        err = req.query.error.split(',')
+    let isValid = false;
+    let err;
+    Profile.findOne({ where: { UserId: +id} })
+    .then(data => {
+        if (!data) {
+          if (req.query.error) {
+            err = req.query.error.split(',')
+          }
+          res.render('addProfile', { err })
+       } else {
+        res.redirect('/home')
       }
-      res.render('addProfile', { err })
-    } else {
-      res.redirect('/home')
-    }
+    })
   }
 
   static postAddProfile(req, res) {
