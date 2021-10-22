@@ -1,8 +1,13 @@
-const {Category, GuestStar, Concert, Song} = require("../models")
+const {Category, GuestStar, Concert, Song, User,Event} = require("../models")
 const { Op } = require("sequelize");
 
 class Controller {
     static homePage(req, res) {
+        let role;
+        if (req.session.role === 'Admin') {
+            role = req.session.role
+            
+        }
         let search = {
             include: {
                 model: GuestStar
@@ -18,7 +23,7 @@ class Controller {
         }
         Category.findAll(search)
         .then(data => {
-            res.render('home', {data})
+            res.render('home', {data, role})
         })
         .catch(err => {
             res.send(err)
@@ -26,7 +31,12 @@ class Controller {
     }
 
     static addNewCategory(req, res) {
-        res.render('addNewCategory')
+        let role;
+        if (role === 'Admin') {
+            role = req.session.role
+            
+        }
+        res.render('addNewCategory',{role})
     }
 
     static postNewCategory(req, res) {
@@ -44,9 +54,10 @@ class Controller {
     }
 
     static showListConcert(req, res) {
+        let role = req.session.role
         Concert.findAll()
         .then(data => {
-            res.render('listConcert', {data})
+            res.render('listConcert', {data, role})
         })
         .catch(err => {
             res.send(err)
@@ -144,11 +155,59 @@ class Controller {
     }
 
     static bookTicket(req, res) {
-        res.render('bookedTicket')
+        let id = req.session.UserId
+        console.log(id);
+        let ConcertId = req.query.Concert
+        Event.findAll({
+            where: {
+                [Op.and]: [{ConcertId}, {UserId:id}]
+            }
+        })
+        .then(findTicket => {
+            if (!findTicket.length) {
+                return Event.create({UserId:id, ConcertId})
+            }
+        })
+        .then(data => {
+            return Event.findAll({
+                include: [{
+                    model: Concert
+                }, {
+                    model: User
+                }],
+                where: {
+                    UserId:+id
+                }
+            })
+        })
+        .then(dataBooked => {
+            res.render('bookedTicket', {dataBooked})
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(err)
+        })
     }
 
     static postTicket(req, res) {
 
+    }
+
+    static deleteGuest(req, res) {
+        let id = req.params.id
+        GuestStar.destroy({
+            where: {
+              id: +id
+            }
+          }) 
+        .then(data => {
+            res.redirect('/home')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+        
+    
     }
 
 }

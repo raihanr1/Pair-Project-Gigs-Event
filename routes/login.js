@@ -13,15 +13,15 @@ router.post('/login', userController.postLogin)
  
 // router.use(middleware)
 
-router.get('/profile', profileController.showProfile)
+router.get('/profile', middleware,profileController.showProfile)
 
-router.get('/profile/add', profileController.addProfile)
-router.post('/profile/add', profileController.postAddProfile)
+router.get('/profile/add', middleware,profileController.addProfile)
+router.post('/profile/add', middleware,profileController.postAddProfile)
 
-router.get('/profile/edit', profileController.editProfile)
-router.post('/profile/edit', profileController.postEditProfile)
+router.get('/profile/edit', middleware,profileController.editProfile)
+router.post('/profile/edit', middleware,profileController.postEditProfile)
 
 
-router.get('/logout', userController.logOut)
+router.get('/logout', middleware,userController.logOut)
 
 module.exports = router
