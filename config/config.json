@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "Pair_Project_On_Demand_APP_Gigs_Event",
-    "host": "localhost",
-    "dialect": "postgres"
+    "username": "raihan",
+    "password": "raihan12",
+    "database": "gigs_event_database",
+    "host": "pg-db",
+    "dialect": "postgres",
+    "port": "5432"
   },
   "test": {
     "username": "root",
@@ -16,8 +17,9 @@
   "production": {
     "username": "raihan",
     "password": "raihan12",
-    "database": "database_production",
+    "database": "gigs_event_database",
     "host": "pg-db",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "port": "5432"
   }
 }
