@@ -1,4 +1,4 @@
-const {Category, GuestStar, Concert, Song} = require("../models")
+const {Category, GuestStar, Concert, Song, User,Event} = require("../models")
 const { Op } = require("sequelize");
 
 class Controller {
@@ -144,7 +144,38 @@ class Controller {
     }
 
     static bookTicket(req, res) {
-        res.render('bookedTicket')
+        let id = req.session.UserId
+        console.log(id);
+        let ConcertId = req.query.Concert
+        Event.findAll({
+            where: {
+                [Op.and]: [{ConcertId}, {UserId:id}]
+            }
+        })
+        .then(findTicket => {
+            if (!findTicket.length) {
+                return Event.create({UserId:id, ConcertId})
+            }
+        })
+        .then(data => {
+            return Event.findAll({
+                include: [{
+                    model: Concert
+                }, {
+                    model: User
+                }],
+                where: {
+                    UserId:+id
+                }
+            })
+        })
+        .then(dataBooked => {
+            res.render('bookedTicket', {dataBooked})
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(err)
+        })
     }
 
     static postTicket(req, res) {

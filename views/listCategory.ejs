@@ -9,7 +9,6 @@
         <div class="col-sm">
           <div class="card-deck">
             <div class="card-group">
-              <form action="/home/ticket/book" method="post">
               <% data.forEach(el=> { %>
                 <div class="card-body">
                   <div class="card" style="width: 21rem;">
@@ -44,12 +43,11 @@
                           </div>
                           <% }) %> 
                         </ul>
-                        <button type="submit" class="btn btn-dark">Booked</button>
+                        <button type="submit" class="btn btn-dark"><a href="/home/ticket/book?Concert=<%= el.ConcertId   %> " style="text-decoration: none;color: white;"">Booked</a></button>
                       </div>
                     </div>
                   </div>
                 <% }) %>
-              </form>
             </div>
           </div>
         </div>

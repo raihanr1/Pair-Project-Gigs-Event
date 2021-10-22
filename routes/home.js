@@ -3,26 +3,26 @@ const router = express.Router()
 const { middleware, isAdmin } = require("../helper/helper")
 const Controller = require("../controllers/homeController")
 
-router.get('/', Controller.homePage)
+router.get('/',middleware, Controller.homePage)
 
-router.get('/category/add', Controller.addNewCategory)
-router.post('/category/add', Controller.postNewCategory)
+router.get('/category/add', isAdmin,Controller.addNewCategory)
+router.post('/category/add', isAdmin,Controller.postNewCategory)
 
-router.get('/guest-star/add', Controller.addGuestStar)
-router.post('/guest-star/add', Controller.postAddGuestStar)
+router.get('/guest-star/add', isAdmin,Controller.addGuestStar)
+router.post('/guest-star/add', isAdmin,Controller.postAddGuestStar)
 
-router.get('/concert/add', Controller.addNewConcert)
-router.post('/concert/add', Controller.postNewConcert)
+router.get('/concert/add', isAdmin,Controller.addNewConcert)
+router.post('/concert/add', isAdmin,Controller.postNewConcert)
 
-router.get('/list/concert', Controller.showListConcert)
+router.get('/list/concert', middleware,Controller.showListConcert)
 
-router.get('/song/add', Controller.addSongs)
-router.post('/song/add', Controller.postAddSongs)
+router.get('/song/add', isAdmin,Controller.addSongs)
+router.post('/song/add', isAdmin,Controller.postAddSongs)
 
-router.get('/home/ticket/book', Controller.bookTicket)
-router.post('/home/ticket/book', Controller.postTicket)
+router.get('/ticket/book', isAdmin,Controller.bookTicket)
+router.post('/ticket/book', isAdmin,Controller.postTicket)
 
-router.get('/category/:categoryId', Controller.seeDetailListCategory)
+router.get('/category/:categoryId', isAdmin,Controller.seeDetailListCategory)
 
 
 

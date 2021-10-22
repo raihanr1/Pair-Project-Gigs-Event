@@ -16,9 +16,16 @@ module.exports = (sequelize, DataTypes) => {
   };
   Event.init({
     UserId: DataTypes.INTEGER,
-    ConcertId: DataTypes.INTEGER
+    ConcertId: DataTypes.INTEGER,
+    ticket: DataTypes.STRING
   }, {
     sequelize,
+    hooks: {
+      beforeCreate(instance, option) {
+        let date = new Date()
+        instance.ticket = `${date.getMinutes()}`
+      }
+    },
     modelName: 'Event',
   });
   return Event;
